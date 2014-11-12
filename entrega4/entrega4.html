@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<title>Entrega4</title>
+	<script type="text/javascript" src="zepto.min.js"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="gmaps.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+
+	<script type="text/javascript">
+    var map, lat, lng, latInit, lngInit;
+
+    $(function(){
+
+      function enlazarMarcador(e){
+
+       // muestra ruta entre marcas anteriores y actuales
+        map.drawRoute({
+          origin: [lat, lng],  // origen en coordenadas anteriores
+          // destino en coordenadas del click o toque actual
+          destination: [e.latLng.lat(), e.latLng.lng()],
+          travelMode: 'driving',
+          strokeColor: '#000000',
+          strokeOpacity: 0.6,
+          strokeWeight: 5
+        });
+
+        lat = e.latLng.lat();   // guarda coords para marca siguiente
+        lng = e.latLng.lng();
+
+        map.addMarker({ lat: lat, lng: lng});  // pone marcador en mapa
+      };
+
+      function geolocalizar(){
+        GMaps.geolocate({
+          success: function(position){
+            latInit = position.coords.latitude;  // guarda coords en lat y lng
+            lngInit = position.coords.longitude;
+            
+            lat=latInit;
+            lng=lngInit;
+
+            map = new GMaps({  // muestra mapa centrado en coords [lat, lng]
+              el: '#map',
+              lat: lat,
+              lng: lng,
+              click: enlazarMarcador,
+              tap: enlazarMarcador
+            });
+            map.addMarker({ lat: lat, lng: lng});  // marcador en [lat, lng]
+          },
+          error: function(error) { alert('GeolocalizaciÃ³n falla: '+error.message); },
+          not_supported: function(){ alert("Su navegador no soporta geolocalizaciÃ³n"); },
+        });
+      };
+      
+      function compactar(){
+       map = new GMaps({            
+          el: '#map',
+          lat: latInit,
+          lng: lngInit         
+        });
+        map.addMarker({ lat: latInit, lng: lngInit});
+
+  	    map.drawRoute({
+	      origin: [latInit, lngInit],  	     
+	      destination: [lat, lng],
+	      travelMode: 'driving',
+	      strokeColor: '#000000',
+	      strokeOpacity: 0.6,
+	      strokeWeight: 5
+        });
+	    map.addMarker({ lat: lat, lng: lng});
+	  };
+	  
+	  $("#compactar").on('click', compactar);
+
+      geolocalizar();
+    });
+	</script>
+</head>
+
+<body>
+	<h1>Geolocalizaci&oacute;n compactada</h1> 
+	<div id="but">
+	 	<button type="button" id="compactar">Compactar</button>
+	 	<hr />
+	</div>
+	<div id="map"></div>
+</body>
+</html>

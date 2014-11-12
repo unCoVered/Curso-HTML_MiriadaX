@@ -1,0 +1,26 @@
+﻿font1 {
+	font-family:Arial;
+	font-size:medium;
+}
+h2 {
+	font-family:Arial;
+	font-size:xx-large;
+}
+font3 {
+	font-family:Arial;
+	font-size:x-small;
+	color:maroon;
+}
+font4 {
+	font-family:Arial;
+	font-size:medium;
+	line-height:25px;
+}
+body { 
+	margin-top: 30px; margin-right: 125px; margin-bottom: 10px; margin-left: 125px 
+}
+body { 
+	padding: 1em 10px 28em 10px 
+}
+
+

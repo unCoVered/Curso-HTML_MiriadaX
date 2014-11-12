@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<title>Ejercicio mod4</title>
+	<link href="estiloejer2.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<div class="estruct" align="center">
+		<header>
+			<h1>Ejercicio Obligatorio Mod4</h1>
+		</header>
+		<article>
+			<table id="tabla">
+	 	    	<tr>
+	 	    		<th>Propiedad</th>
+	 	    		<th>Valor</th>
+	 	    	</tr>
+	 		</table>
+	 		
+			<script type="text/javascript">
+				//Objeto del que queremos saber las propiedades
+				var objeto = prompt("Introduce nombre de objeto");
+				
+				//Si es un objeto
+				if(objeto in window){					
+					var t = document.getElementById("tabla");
+					var iterador;
+					
+					//Recorremos sus propiedades
+					for(iterador in window[objeto]){
+						
+						//Si esa propiedad no es un objeto ni una funcion imprimimos valor
+						if((typeof(window[objeto][iterador]) !== 'object') &&  (typeof(window[objeto][iterador]) !== 'function')){
+							t.innerHTML += "<tr><td align=center>" + iterador + "</td><td align=center><b>" + window[objeto][iterador] + "</b></td></tr>";
+						}
+						
+						//En caso contrario indicamos que no se puede imprimir
+						else{
+							t.innerHTML += "<tr><td align=center>" + iterador + "</td><td align=center> No imprimible </td></tr>";
+
+						}
+					}
+				}
+				
+				//No es un objeto, no se puede imprimir
+				else{
+					 alert("No existe");
+				}
+			</script>
+		</article>
+	</div>
+	
+</body>
+
+</html>

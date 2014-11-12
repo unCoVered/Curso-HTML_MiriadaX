@@ -1,0 +1,44 @@
+﻿body{
+  font-family: Arial;
+}
+
+#latlng{
+  display: block;
+  margin: 0;
+  padding: 0;
+  position: absolute; /* posiciÃ³n absoluta a navegador */
+  top: 0;             /* ajusta a borde de navegador */
+  left: 0;
+  right: 0;
+  height: 50px;
+}
+
+h1{
+	background:#CCCCCC;	
+	width:33%;
+	border:medium;
+	border-style:solid
+}
+
+hr{
+	color: gray;
+}
+
+#compactar{
+	background:#CCCCCC;	
+}
+
+#map{
+  display: block;
+  margin: 10px;
+  padding: 10px;
+  position: absolute;   
+  top: 130px;       
+  left: 0;        
+  right: 0;
+  bottom: 0;	   
+  background: gray;
+  border:thin;
+  border-bottom-style:solid;
+  border-color:gray
+}
